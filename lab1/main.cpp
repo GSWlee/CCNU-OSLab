@@ -23,7 +23,6 @@ bool isFinsh(vector<task> taskSet);
 
 bool sortSJF(task a, task b);
 
-
 int main() {
     int n;
     cout << "输入cpu核心个数:";
@@ -125,9 +124,14 @@ void FCFS(vector<task> taskSet, cpu intel) {
     cout << "先来先服务" << endl;
     cout << "任务号" << "      " << "进入时间" << "      " << "开始时间" << "      " << "结束时间" << "      " << "预计时间" << "  "
          << "周转时间" << "  " << "带权周转时间" << endl;
+    int sumtime = 0;
+    double sumrate = 0;
     for (int i = 0; i < taskSet.size(); i++) {
         taskSet[i].showInfo();
+        sumrate += taskSet[i].getRate();
+        sumtime += taskSet[i].getCostTime();
     }
+    cout << "平均周转时间：" << sumtime / taskSet.size() << "      带权平均周转时间：" << sumrate / (double) taskSet.size() << endl;
 }
 
 void SJF(vector<task> taskSet, cpu intel) {
@@ -164,13 +168,18 @@ void SJF(vector<task> taskSet, cpu intel) {
         sysClockHour += (sysClockMinute + 1) / 60;
         sysClockMinute = (sysClockMinute + 1) % 60;
     }
-    cout<<endl;
+    cout << endl;
     cout << "最短作业优先" << endl;
     cout << "任务号" << "      " << "进入时间" << "      " << "开始时间" << "      " << "结束时间" << "      " << "预计时间" << "  "
          << "周转时间" << "  " << "带权周转时间" << endl;
+    int sumtime = 0;
+    double sumrate = 0;
     for (int i = 0; i < taskSet.size(); i++) {
         taskSet[i].showInfo();
+        sumrate += taskSet[i].getRate();
+        sumtime += taskSet[i].getCostTime();
     }
+    cout << "平均周转时间：" << sumtime / taskSet.size() << "      带权平均周转时间：" << sumrate / (double) taskSet.size() << endl;
 }
 
 void HRN(vector<task> taskSet, cpu intel) {
@@ -214,12 +223,17 @@ void HRN(vector<task> taskSet, cpu intel) {
         sysClockHour += (sysClockMinute + 1) / 60;
         sysClockMinute = (sysClockMinute + 1) % 60;
     }
-    cout<<endl;
+    cout << endl;
     cout << "最高响应比优先" << endl;
     cout << "任务号" << "      " << "进入时间" << "      " << "开始时间" << "      " << "结束时间" << "      " << "预计时间" << "  "
          << "周转时间" << "  " << "带权周转时间" << endl;
+    int sumtime = 0;
+    double sumrate = 0;
     for (int i = 0; i < taskSet.size(); i++) {
         taskSet[i].showInfo();
+        sumrate += taskSet[i].getRate();
+        sumtime += taskSet[i].getCostTime();
     }
+    cout << "平均周转时间：" << sumtime / taskSet.size() << "      带权平均周转时间：" << sumrate / (double) taskSet.size() << endl;
 }
 

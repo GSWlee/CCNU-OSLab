@@ -27,9 +27,14 @@ public:
     int getArriveMinute();
 
     int getNeedTime();
+
     int getEndHour();
 
     int getEndMinute();
+
+    int getCostTime();
+
+    int getRate();
 
     bool isFinsh();
 

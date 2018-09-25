@@ -27,7 +27,7 @@ void task::begin(const int beginHour, const int beginMinute) {
     this->endMinute = (this->beginMinute + this->needTime) % 60;
     this->costTime = 60 * (this->endHour - this->arriveHour) + (this->endMinute - this->arriveMinute);
     this->rate = (double) this->costTime / (double) this->needTime;
-    this->condition= true;
+    this->condition = true;
 }
 
 void task::finsh() { this->condition = true; }
@@ -41,6 +41,10 @@ int task::getNeedTime() { return needTime; }
 int task::getEndHour() { return endHour; }
 
 int task::getEndMinute() { return endMinute; }
+
+int task::getCostTime() { return costTime; }
+
+int task::getRate() { return rate; }
 
 void task::showInfo() {
     printf("%3d%10d:%02d%10d:%02d%10d:%02d%10d%10d%10.3lf\n", num, arriveHour, arriveMinute, beginHour, beginMinute,

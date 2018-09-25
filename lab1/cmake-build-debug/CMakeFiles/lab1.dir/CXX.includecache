@@ -6,7 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/gswlee/study/OSclass/lab1/task.cpp
+/home/gswlee/study/OSclass/lab1/cpu.h
+vector
+-
+string
+-
+
+/home/gswlee/study/OSclass/lab1/main.cpp
+iostream
+-
+vector
+-
+fstream
+-
+algorithm
+-
+cpu.h
+/home/gswlee/study/OSclass/lab1/cpu.h
 task.h
 /home/gswlee/study/OSclass/lab1/task.h
 
