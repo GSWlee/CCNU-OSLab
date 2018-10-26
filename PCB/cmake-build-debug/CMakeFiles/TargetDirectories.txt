@@ -1,0 +1,3 @@
+C:/Users/ck/Desktop/PCB/cmake-build-debug/CMakeFiles/PCB.dir
+C:/Users/ck/Desktop/PCB/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ck/Desktop/PCB/cmake-build-debug/CMakeFiles/rebuild_cache.dir
