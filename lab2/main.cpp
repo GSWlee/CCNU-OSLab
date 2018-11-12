@@ -7,7 +7,6 @@
 
 using namespace std;
 
-int BLOCK_SIZE;
 int MEMORY_SIZE;
 
 
@@ -40,11 +39,35 @@ string &trim(std::string &s) {
 }
 
 
-//todo 保证生成的随机数不会有重复的.
+bool find(int id, vector<test> tests) {
+    for (auto temp:tests) {
+        if (temp.num == id)
+            return true;
+    }
+    return false;
+}
+
+bool find(int id, vector<int> nums) {
+    for (auto temp:nums) {
+        if (temp == id)
+            return true;
+    }
+    return false;
+}
+
 void randtest(vector<test> &tests, list<space> &spaces) {
     vector<int> nums;
 
-    for (int i = 0; i < 20; i++) nums.push_back(rand() % MEMORY_SIZE);
+    for (int i = 0; i < 20; i++) {
+        auto num = rand() % MEMORY_SIZE;
+        if(num==67)
+            printf("s");
+        while (find(num, nums)) {
+            num = rand() % MEMORY_SIZE;
+        }
+        nums.push_back(num);
+
+    }
     sort(nums.begin(), nums.end());
     test temp;
     space toy;
@@ -56,7 +79,12 @@ void randtest(vector<test> &tests, list<space> &spaces) {
         toy.start_address = (i == 0 ? 0 : nums[i * 2 - 1]);
         toy.end_address = nums[i * 2];
         tests.push_back(temp);
-        spaces.push_back(toy);
+        if (i != 0 && (toy.start_address == spaces.back().end_address)) {
+            auto it = spaces.end();
+            (it--)->end_address = toy.end_address;
+        } else {
+            spaces.push_back(toy);
+        }
     }
     spaces.emplace_back(space(nums[19], MEMORY_SIZE));
 }
@@ -66,7 +94,8 @@ void showempty(list<space> spaces) {
     printf("show space information:\n");
     printf("space_size   space_saddress  space_eaddress\n");
     for (; temp != spaces.end(); temp++) {
-        printf("%10d  %14d  %14d\n", temp->end_address - temp->start_address, temp->start_address, temp->end_address);
+        printf("%10d  %14d  %14d\n", temp->end_address - temp->start_address, temp->start_address,
+               temp->end_address);
     }
 }
 
@@ -78,13 +107,6 @@ void showtest(vector<test> test) {
 
 }
 
-bool find(int id, vector<test> tests) {
-    for (auto temp:tests) {
-        if (temp.num == id)
-            return true;
-    }
-    return false;
-}
 
 bool drop(int id, vector<test> &tests, list<space> &spaces) {
     bool flag = false;
@@ -193,8 +215,6 @@ int addb(int size, vector<test> &tests, list<space> &spaces) {
 int main() {
     cout << "Please enter memory size:";
     cin >> MEMORY_SIZE;
-    cout << "Please enter block size:";
-    cin >> BLOCK_SIZE;
     vector<test> tests;
     list<space> spaces;
     randtest(tests, spaces);
@@ -235,19 +255,22 @@ int main() {
                 cin >> obtion;
                 int size = stoi(obtion);
                 int id = addf(size, tests, spaces);
-                auto message = (id >= 0 ? "test has been set id is " + to_string(id) : "failed set test:not enough");
+                auto message = (id >= 0 ? "test has been set id is " + to_string(id)
+                                        : "failed set test:not enough");
                 cout << message << endl;
             } else if (order == "-b") {
                 cin >> obtion;
                 int size = stoi(obtion);
                 int id = addb(size, tests, spaces);
-                auto message = (id >= 0 ? "test has been set id is " + to_string(id) : "failed set test:not enough");
+                auto message = (id >= 0 ? "test has been set id is " + to_string(id)
+                                        : "failed set test:not enough");
                 cout << message << endl;
             } else if (order == "-w") {
                 cin >> obtion;
                 int size = stoi(obtion);
                 int id = addw(size, tests, spaces);
-                auto message = (id >= 0 ? "test has been set id is " + to_string(id) : "failed set test:not enough");
+                auto message = (id >= 0 ? "test has been set id is " + to_string(id)
+                                        : "failed set test:not enough");
                 cout << message << endl;
             } else {
                 cout << "command not find" << endl;
