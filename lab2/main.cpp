@@ -258,14 +258,14 @@ int main() {
                 auto message = (id >= 0 ? "test has been set id is " + to_string(id)
                                         : "failed set test:not enough");
                 cout << message << endl;
-            } else if (order == "-b") {
+            } else if (obtion == "-b") {
                 cin >> obtion;
                 int size = stoi(obtion);
                 int id = addb(size, tests, spaces);
                 auto message = (id >= 0 ? "test has been set id is " + to_string(id)
                                         : "failed set test:not enough");
                 cout << message << endl;
-            } else if (order == "-w") {
+            } else if (obtion == "-w") {
                 cin >> obtion;
                 int size = stoi(obtion);
                 int id = addw(size, tests, spaces);
